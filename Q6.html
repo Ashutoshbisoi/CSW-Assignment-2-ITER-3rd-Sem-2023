@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Manipulation</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function(){
+     
+      $("#addRowBtn").click(function(){
+        
+        var newRow = $("<tr><td>New Cell 1</td><td>New Cell 2</td></tr>");
+        
+        
+        $("#dataTable").append(newRow);
+      });
+
+      
+      $("#changeColorBtn").click(function(){
+        
+        $("#changeColorText").css("color", "red");
+      });
+
+      
+      $("#removeByIdBtn").click(function(){
+        var idToRemove = $("#removeByIdInput").val();
+
+        
+        $("#" + idToRemove).remove();
+      });
+    });
+  </script>
+</head>
+<body>
+  <h2>Table Manipulation</h2>
+
+  
+  <table id="dataTable" border="1">
+    <tr>
+      <td>Cell 1</td>
+      <td>Cell 2</td>
+    </tr>
+    <tr>
+      <td>Cell 3</td>
+      <td>Cell 4</td>
+    </tr>
+  </table>
+  <br>
+
+  
+  <button id="addRowBtn">Add Row</button>
+  <br><br>
+
+  
+  <button id="changeColorBtn">Change Color</button>
+  <p id="changeColorText">This text color can be changed.</p>
+  <br>
+
+  
+  <input type="text" id="removeByIdInput" placeholder="Enter ID to remove">
+  <button id="removeByIdBtn">Remove by ID</button>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Listings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    #jobList {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .job {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .filter {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="jobList">
+    <div class="filter">
+      <label for="category">Filter by Category:</label>
+      <select id="category" onchange="filterJobs()">
+        <option value="all">All Categories</option>
+        <option value="it">IT</option>
+        <option value="marketing">Marketing</option>
+        <option value="finance">Finance</option>
+        
+      </select>
+    </div>
+
+    <div id="jobs">
+      
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    
+    var jobData = [
+      { title: "Web Developer", category: "it" },
+      { title: "Marketing Specialist", category: "marketing" },
+      { title: "Financial Analyst", category: "finance" },
+      
+    ];
+
+    
+    function filterJobs() {
+      var selectedCategory = $("#category").val();
+
+      
+      var filteredJobs = (selectedCategory === "all")
+        ? jobData
+        : jobData.filter(job => job.category === selectedCategory);
+
+     
+      displayJobs(filteredJobs);
+    }
+
+    
+    function displayJobs(jobs) {
+      var jobsContainer = $("#jobs");
+      jobsContainer.empty(); 
+
+      
+      jobs.forEach(job => {
+        var jobElement = $("<div class='job'><span>" + job.title + "</span><span>" + job.category + "</span></div>");
+        jobsContainer.append(jobElement);
+      });
+    }
+
+    
+    $(document).ready(function(){
+      displayJobs(jobData);
+    });
+  </script>
+</body>
+</html>

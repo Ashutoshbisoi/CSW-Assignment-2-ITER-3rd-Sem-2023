@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery Methods Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <style>
+    
+    #demoElement {
+      width: 200px;
+      height: 100px;
+      background-color: lightblue;
+      border: 1px solid #333;
+      margin: 20px;
+      padding: 10px;
+      display: none; 
+    }
+  </style>
+  <script>
+    $(document).ready(function(){
+      
+      $("#demoElement").slideDown(2000);
+
+      
+      $("#demoElement").animate({
+        width: '400px',
+        height: '200px',
+        opacity: 0.8
+      }, 2000);
+
+      
+      $("#demoElement").fadeIn(2000);
+
+      
+      $("#demoElement").delay(2000).hide(0);
+
+      
+      $("#demoElement").delay(4000).show(0);
+
+      
+      $("#demoElement").mouseenter(function(){
+        $(this).css("background-color", "lightgreen");
+      });
+
+      
+      $("#demoElement").dblclick(function(){
+        alert("Double-clicked!");
+      });
+
+      
+      $("#demoElement").mouseleave(function(){
+        $(this).css("background-color", "lightblue");
+      });
+
+      
+      $("#demoElement").attr("title", "This is a demo element");
+
+      
+      $("#demoElement").html("<p>This content has been added using html()</p>");
+    });
+  </script>
+</head>
+<body>
+  <div id="demoElement">Demo Element</div>
+</body>
+</html>

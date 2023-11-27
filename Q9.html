@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock, Paper, Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #game-container {
+      max-width: 400px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    #score {
+      margin-top: 20px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="game-container">
+    <h2>Rock, Paper, Scissors</h2>
+    <p>Make your choice:</p>
+
+    <div>
+      <button onclick="userChoice('rock')">Rock</button>
+      <button onclick="userChoice('paper')">Paper</button>
+      <button onclick="userChoice('scissors')">Scissors</button>
+    </div>
+
+    <div id="result"></div>
+    <div id="score">Score: <span id="userScore">0</span> - <span id="computerScore">0</span></div>
+
+    <button onclick="resetGame()">Reset Game</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    
+    var userScore = localStorage.getItem("userScore") || 0;
+    var computerScore = localStorage.getItem("computerScore") || 0;
+
+    
+    $("#userScore").text(userScore);
+    $("#computerScore").text(computerScore);
+
+    
+    function userChoice(choice) {
+      
+      var computerChoices = ["rock", "paper", "scissors"];
+      
+      
+      var computerChoice = computerChoices[Math.floor(Math.random() * 3)];
+
+      
+      var result = determineWinner(choice, computerChoice);
+
+      
+      $("#result").text(result);
+      $("#userScore").text(userScore);
+      $("#computerScore").text(computerScore);
+    }
+
+    
+    function determineWinner(userChoice, computerChoice) {
+      if (userChoice === computerChoice) {
+        return "It's a tie!";
+      } else if (
+        (userChoice === "rock" && computerChoice === "scissors") ||
+        (userChoice === "paper" && computerChoice === "rock") ||
+        (userChoice === "scissors" && computerChoice === "paper")
+      ) {
+       
+        userScore++;
+        localStorage.setItem("userScore", userScore);
+        return "You win!";
+      } else {
+        
+        computerScore++;
+        localStorage.setItem("computerScore", computerScore);
+        return "You lose!";
+      }
+    }
+
+    
+    function resetGame() {
+      userScore = 0;
+      computerScore = 0;
+      localStorage.setItem("userScore", userScore);
+      localStorage.setItem("computerScore", computerScore);
+      $("#userScore").text(userScore);
+      $("#computerScore").text(computerScore);
+      $("#result").text("");
+    }
+  </script>
+</body>
+</html>
